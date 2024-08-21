@@ -7,16 +7,17 @@ import com.urise.webapp.model.Resume;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public abstract class AbstractStorageTest {
     protected static final String UUID_1 = "uuid0";
     protected static final String UUID_2 = "uuid1";
     protected static final String UUID_3 = "uuid2";
-    protected static final Resume R1 = new Resume(UUID_1);
-    protected static final Resume R2 = new Resume(UUID_2);
-    protected static final Resume R3 = new Resume(UUID_3);
-    protected static final Resume R4 = new Resume("unknownUUID");
+    protected static final Resume R1 = new Resume(UUID_1, "Petrov");
+    protected static final Resume R2 = new Resume(UUID_2, "Sidorov");
+    protected static final Resume R3 = new Resume(UUID_3, "Fixik");
+    protected static final Resume R4 = new Resume("unknownUUID", "Serega");
     protected static int INITIAL_ARRAY_SIZE = 3;
     protected Storage storage;
 
