@@ -22,18 +22,18 @@ public class ResumeTestData {
 
     R1.setSection(
         OBJECTIVE,
-        new TextAbstractSection(
+        new TextSection(
             "Ведущий стажировок и корпоративного обучения по "
                 + "Java Web и Enterprise технологиям"));
     R1.setSection(
         PERSONAL,
-        new TextAbstractSection(
+        new TextSection(
             "Аналитический склад ума, сильная логика, креативность, "
                 + "инициативность. Пурист кода и архитектуры."));
 
     R1.setSection(
         ACHIEVEMENT,
-        new ListAbstractSection(
+        new ListSection(
             new ArrayList<>(
                 Arrays.asList(
                     "Организация команды и успешная реализация Java проектов "
@@ -67,7 +67,7 @@ public class ResumeTestData {
                         + "и Никарагуа."))));
     R1.setSection(
         QUALIFICATIONS,
-        new ListAbstractSection(
+        new ListSection(
             new ArrayList<>(
                 Arrays.asList(
                     "JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty,WebLogic, WSO2",
@@ -94,7 +94,7 @@ public class ResumeTestData {
 
     R1.setSection(
         EXPERIENCE,
-        new OrganizationAbstractSection(
+        new OrganizationSection(
             new ArrayList<>(
                 Arrays.asList(
                     new Organization(
@@ -194,7 +194,7 @@ public class ResumeTestData {
 
     R1.setSection(
         EDUCATION,
-        new OrganizationAbstractSection(
+        new OrganizationSection(
             new ArrayList<>(
                 Arrays.asList(
                     new Organization(

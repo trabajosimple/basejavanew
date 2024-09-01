@@ -1,30 +1,29 @@
 package com.urise.webapp.storage;
 
 import com.urise.webapp.model.Resume;
-
 import java.util.List;
 
 public interface Storage {
 
-    void save(Resume resume);
+  void save(Resume r);
 
-    void update(Resume resume);
+  void update(Resume r);
 
-    Resume get(String uuid);
+  Resume get(String uuid);
 
-    void delete(String uuid);
+  void delete(String uuid);
 
-    List<Resume> getAllSorted();
+  default void clear() {}
 
-    default void clear() {
-    }
+  default List<Resume> getAllSorted() {
+    return null;
+  }
 
-    default Resume[] getAll() {
-        return null;
-    }
+  default Resume[] getAll() {
+    return null;
+  }
 
-    default int size() {
-        return 0;
-    }
-
+  default int size() {
+    return 0;
+  }
 }
