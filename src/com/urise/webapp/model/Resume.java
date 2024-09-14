@@ -1,19 +1,25 @@
 package com.urise.webapp.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    private final String uuid;
-    private final String fullName;
+    private String uuid;
+    private String fullName;
     private final Map<SectionType, AbstractSection> sections = new EnumMap<>(SectionType.class);
     private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+
+    public Resume() {
+    }
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -39,8 +45,8 @@ public class Resume implements Comparable<Resume>, Serializable {
         return uuid;
     }
 
-    public AbstractSection getSection(SectionType sectionType) {
-        return sections.get(sectionType);
+    public Map<ContactType, String> getContacts() {
+        return new EnumMap<>(contacts);
     }
 
     public String getContact(ContactType contactType) {
@@ -49,6 +55,14 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     public void setContact(ContactType type, String value) {
         contacts.put(type, value);
+    }
+
+    public Map<SectionType, AbstractSection> getSections() {
+        return new HashMap<>(sections);
+    }
+
+    public AbstractSection getSection(SectionType sectionType) {
+        return sections.get(sectionType);
     }
 
     public void setSection(SectionType type, AbstractSection section) {
@@ -60,7 +74,10 @@ public class Resume implements Comparable<Resume>, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Resume resume = (Resume) o;
-        return uuid.equals(resume.uuid) && fullName.equals(resume.fullName);
+        return Objects.equals(uuid, resume.uuid) &&
+                Objects.equals(fullName, resume.fullName) &&
+                Objects.equals(contacts, resume.contacts) &&
+                Objects.equals(sections, resume.sections);
     }
 
     @Override

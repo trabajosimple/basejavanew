@@ -1,5 +1,10 @@
 package com.urise.webapp.model;
 
+import com.urise.webapp.util.XmlLocalDateAdapter;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -11,12 +16,16 @@ import java.util.Objects;
 import static com.urise.webapp.util.DateUtil.NOW;
 import static com.urise.webapp.util.DateUtil.of;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
-    private final Link homePage;
+    private Link homePage;
     @Serial
     private static final long serialVersionUID = 1L;
 
     private List<Position> positions = new ArrayList<>();
+
+    public Organization() {
+    }
 
     public Organization(
             String name,
@@ -30,6 +39,18 @@ public class Organization implements Serializable {
         Objects.requireNonNull(title, "title must not be null");
         homePage = new Link(name, url);
         positions.add(new Position(StartYear, StartMonth, endYear, endMonth, title, description));
+    }
+
+    public Link getHomePage() {
+        return homePage;
+    }
+
+    public List<Position> getPositions() {
+        return new ArrayList<>(positions);
+    }
+
+    public void setPositions(List<Position> positions) {
+        this.positions = positions;
     }
 
     public Organization(
@@ -71,11 +92,17 @@ public class Organization implements Serializable {
         return "Organization(" + homePage + "," + positions + ')';
     }
 
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
-        private final LocalDate startDate;
-        private final LocalDate endDate;
-        private final String title;
-        private final String description;
+        @XmlJavaTypeAdapter(XmlLocalDateAdapter.class)
+        private LocalDate startDate;
+        @XmlJavaTypeAdapter(XmlLocalDateAdapter.class)
+        private LocalDate endDate;
+        private String title;
+        private String description;
+
+        public Position() {
+        }
 
         public Position(int startYear, int startMonth, String title, String description) {
             this(of(startYear, startMonth), NOW, title, description);
