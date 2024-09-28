@@ -26,7 +26,7 @@ public class XmlParser {
         }
     }
 
-    
+
     @SuppressWarnings("unchecked")
     public <T> T unmarshall(Reader reader) {
         try {
