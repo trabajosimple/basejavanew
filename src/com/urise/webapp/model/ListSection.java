@@ -6,9 +6,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class ListSection extends AbstractSection {
-    private List<String> items;
+
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public static final ListSection EMPTY = new ListSection("");
+
+    private List<String> items;
 
     public ListSection() {
     }
@@ -41,8 +45,6 @@ public class ListSection extends AbstractSection {
 
     @Override
     public String toString() {
-        return "ListSection{" +
-                "items=" + items +
-                '}';
+        return "ListSection{" + "items=" + items + '}';
     }
 }

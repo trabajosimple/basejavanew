@@ -18,24 +18,19 @@ import static com.urise.webapp.util.DateUtil.of;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
-    private Link homePage;
     @Serial
     private static final long serialVersionUID = 1L;
+    public static final Organization EMPTY = new Organization("", "", Position.EMPTY);
+
+    private Link homePage;
 
     private List<Position> positions = new ArrayList<>();
 
     public Organization() {
     }
 
-    public Organization(
-            String name,
-            String url,
-            int StartYear,
-            int StartMonth,
-            int endYear,
-            int endMonth,
-            String title,
-            String description) {
+    public Organization(String name, String url, int StartYear, int StartMonth, int endYear,
+                        int endMonth, String title, String description) {
         Objects.requireNonNull(title, "title must not be null");
         homePage = new Link(name, url);
         positions.add(new Position(StartYear, StartMonth, endYear, endMonth, title, description));
@@ -53,13 +48,8 @@ public class Organization implements Serializable {
         this.positions = positions;
     }
 
-    public Organization(
-            String name,
-            String url,
-            int StartYear,
-            int StartMonth,
-            String title,
-            String description) {
+    public Organization(String name, String url, int StartYear, int StartMonth, String title,
+                        String description) {
         Objects.requireNonNull(title, "title must not be null");
         homePage = new Link(name, url);
         positions.add(new Position(StartYear, StartMonth, title, description));
@@ -94,6 +84,8 @@ public class Organization implements Serializable {
 
     @XmlAccessorType(XmlAccessType.FIELD)
     public static class Position implements Serializable {
+        public static final Position EMPTY = new Position();
+
         @XmlJavaTypeAdapter(XmlLocalDateAdapter.class)
         private LocalDate startDate;
         @XmlJavaTypeAdapter(XmlLocalDateAdapter.class)
@@ -108,13 +100,8 @@ public class Organization implements Serializable {
             this(of(startYear, startMonth), NOW, title, description);
         }
 
-        public Position(
-                int startYear,
-                int startMonth,
-                int endYear,
-                int endMonth,
-                String title,
-                String description) {
+        public Position(int startYear, int startMonth, int endYear, int endMonth, String title,
+                        String description) {
             this(of(startYear, startMonth), of(endYear, endMonth), title, description);
         }
 
@@ -149,10 +136,8 @@ public class Organization implements Serializable {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Position position = (Position) o;
-            return Objects.equals(startDate, position.startDate)
-                    && Objects.equals(endDate, position.endDate)
-                    && Objects.equals(title, position.title)
-                    && Objects.equals(description, position.description);
+            return Objects.equals(startDate, position.startDate) && Objects.equals(endDate,
+                    position.endDate) && Objects.equals(title, position.title) && Objects.equals(description, position.description);
         }
 
         @Override
